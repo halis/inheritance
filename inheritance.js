@@ -7,10 +7,11 @@ Function.prototype.inherits = Function.prototype.inherits || function(parentClas
 function Base() {}
 
 function Class(constructors) {
-	constructors.unshift(Base);
 	return (function() {
 		var Constructor, result;
-		if (constructors == null || constructors.length < 1) return context;
+		if (constructors == null || constructors.length < 1) return Object.create({});
+		
+		constructors.unshift(Base); // Everything inherits from empty Base class
 
 		Constructor = (function() {
 			var i = 0, c1, c2;
